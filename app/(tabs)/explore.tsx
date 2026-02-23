@@ -2,29 +2,33 @@ import { Image } from 'expo-image';
 import { View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Collapsible } from '@/components/ui/collapsible';
-import { ExternalLink } from '@/components/external-link';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Fonts } from '@/constants/theme';
-import { Button } from '@react-navigation/elements';
+import { SelectPokemon } from "@/components/select-pokemon";
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
+import { useThemeColor } from "@/hooks/use-theme-color";
 
 export default function TabTwoScreen() {
-  return (
-    <SafeAreaView style={styles.parentContainer}>
-      <Text style={styles.header}>Search For Your Pokemon</Text>
-      <View style={styles.searchBar}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder='Type Something...'>
-        </TextInput>
-        <Pressable style={styles.searchBtn}>
-          <Text style={styles.searchBtnText}>Search</Text>
-        </Pressable>
-      </View>
 
+  const backgroundColor = useThemeColor({}, "background");
+
+  return (
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor }}
+      edges={["top"]}
+    >
+      <ThemedView style={styles.parentContainer}>
+        <ThemedText style={styles.header}>Search For Your Pokemon</ThemedText>
+        <ThemedView style={styles.searchBar}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder='Type Something...'>
+          </TextInput>
+          <Pressable style={styles.searchBtn}>
+            <ThemedText style={styles.searchBtnText}>Search</ThemedText>
+          </Pressable>
+        </ThemedView>
+        <SelectPokemon count={1000} />
+      </ThemedView>
     </SafeAreaView>
 
   );
@@ -32,7 +36,7 @@ export default function TabTwoScreen() {
 
 const styles = StyleSheet.create({
   parentContainer: {
-
+    flex: 1,
   },
   header: {
     color: "white",
